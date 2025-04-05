@@ -1,0 +1,11 @@
+.gradle/
+.idea/
+.vscode/
+bin/
+out/
+build/
+target/
+*.iml
+.DS_Store
+.gradletasknamecache
+.java-version
