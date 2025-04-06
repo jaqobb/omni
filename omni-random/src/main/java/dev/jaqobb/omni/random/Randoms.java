@@ -202,4 +202,60 @@ public final class Randoms {
     }
     return totalWeight;
   }
+
+  public static boolean chance1(double chance) {
+    return chance1(ThreadLocalRandom.current(), chance);
+  }
+
+  public static boolean chance1(Random random, double chance) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (chance <= 0.0D) {
+      return false;
+    }
+    if (chance >= 1.0D) {
+      return true;
+    }
+    return chance >= randomChance1(random);
+  }
+
+  public static double randomChance1() {
+    return randomChance1(ThreadLocalRandom.current());
+  }
+
+  public static double randomChance1(Random random) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    return randomDouble(0.0D, 1.0D);
+  }
+
+  public static boolean chance100(double chance) {
+    return chance100(ThreadLocalRandom.current(), chance);
+  }
+
+  public static boolean chance100(Random random, double chance) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (chance <= 0.0D) {
+      return false;
+    }
+    if (chance >= 100.0D) {
+      return true;
+    }
+    return chance >= randomChance100(random);
+  }
+
+  public static double randomChance100() {
+    return randomChance100(ThreadLocalRandom.current());
+  }
+
+  public static double randomChance100(Random random) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    return randomDouble(0.0D, 100.0D);
+  }
 }
