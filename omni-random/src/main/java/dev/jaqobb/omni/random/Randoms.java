@@ -1,5 +1,8 @@
 package dev.jaqobb.omni.random;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -83,5 +86,73 @@ public final class Randoms {
       return min;
     }
     return random.nextDouble(min, Math.nextUp(max));
+  }
+
+  public static <T> T randomElement(T[] array) {
+    return randomElement(ThreadLocalRandom.current(), array);
+  }
+
+  public static <T> T randomElement(Random random, T[] array) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (array == null) {
+      throw new IllegalArgumentException("array cannot be null");
+    }
+    if (array.length == 0) {
+      throw new IllegalArgumentException("array cannot be empty");
+    }
+    if (array.length == 1) {
+      return array[0];
+    }
+    return array[random.nextInt(array.length)];
+  }
+
+  public static <T> T randomElement(List<T> list) {
+    return randomElement(ThreadLocalRandom.current(), list);
+  }
+
+  public static <T> T randomElement(Random random, List<T> list) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (list == null) {
+      throw new IllegalArgumentException("list cannot be null");
+    }
+    if (list.isEmpty()) {
+      throw new IllegalArgumentException("list cannot be empty");
+    }
+    if (list.size() == 1) {
+      return list.get(0);
+    }
+    return list.get(random.nextInt(list.size()));
+  }
+
+  public static <T> T randomElement(Collection<T> collection) {
+    return randomElement(ThreadLocalRandom.current(), collection);
+  }
+
+  public static <T> T randomElement(Random random, Collection<T> collection) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (collection == null) {
+      throw new IllegalArgumentException("collection cannot be null");
+    }
+    if (collection.isEmpty()) {
+      throw new IllegalArgumentException("collection cannot be empty");
+    }
+    if (collection.size() == 1) {
+      return collection.iterator().next();
+    }
+    int chosenIndex = random.nextInt(collection.size());
+    if (collection instanceof List) {
+      return ((List<T>) collection).get(chosenIndex);
+    }
+    Iterator<T> iterator = collection.iterator();
+    for (int currentIndex = 0; currentIndex < chosenIndex; currentIndex += 1) {
+      iterator.next();
+    }
+    return iterator.next();
   }
 }
