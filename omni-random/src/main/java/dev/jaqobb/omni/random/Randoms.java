@@ -155,4 +155,51 @@ public final class Randoms {
     }
     return iterator.next();
   }
+
+  public static <T extends WeightedRandomChoice> T randomWeightedChoice(
+      Iterable<? extends T> choices) {
+    return randomWeightedChoice(ThreadLocalRandom.current(), choices);
+  }
+
+  public static <T extends WeightedRandomChoice> T randomWeightedChoice(Random random,
+      Iterable<? extends T> choices) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (choices == null) {
+      throw new IllegalArgumentException("choices cannot be null");
+    }
+    Iterator<? extends T> iterator = choices.iterator();
+    if (!iterator.hasNext()) {
+      throw new IllegalArgumentException("choices cannot be empty");
+    }
+    double totalWeight = totalWeight(choices);
+    double randomWeight = randomDouble(0.0D, totalWeight);
+    while (iterator.hasNext()) {
+      T choice = iterator.next();
+      if (choice == null) {
+        throw new IllegalArgumentException("choices cannot contain null elements");
+      }
+      randomWeight -= choice.getWeight();
+      if (randomWeight <= 0.0D) {
+        return choice;
+      }
+    }
+    // This should never happen.
+    return null;
+  }
+
+  public static double totalWeight(Iterable<? extends WeightedRandomChoice> choices) {
+    if (choices == null) {
+      throw new IllegalArgumentException("choices cannot be null");
+    }
+    double totalWeight = 0.0D;
+    for (WeightedRandomChoice choice : choices) {
+      if (choice == null) {
+        throw new IllegalArgumentException("choices cannot contain null elements");
+      }
+      totalWeight += choice.getWeight();
+    }
+    return totalWeight;
+  }
 }
