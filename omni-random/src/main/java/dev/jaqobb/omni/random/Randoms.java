@@ -20,6 +20,6 @@ public final class Randoms {
     if (min == max) {
       return min;
     }
-    return random.nextInt(max - min) + min;
+    return random.nextInt(max - min + 1) + min;
   }
 }
