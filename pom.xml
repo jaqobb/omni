@@ -44,6 +44,8 @@
   </properties>
 
   <modules>
+    <module>omni-common</module>
+    <module>omni-math</module>
     <module>omni-random</module>
   </modules>
 
