@@ -3,18 +3,46 @@ package dev.jaqobb.omni.math;
 import java.util.Objects;
 
 public class BoundingBox2D {
-  protected final double minX;
-  protected final double minY;
-  protected final double maxX;
-  protected final double maxY;
-
-  public BoundingBox2D(double minX, double minY, double maxX, double maxY) {
+  public static BoundingBox2D from(double minX, double minY, double maxX, double maxY) {
     if (minX > maxX) {
       throw new IllegalArgumentException("minX cannot be greater than maxX");
     }
     if (minY > maxY) {
       throw new IllegalArgumentException("minY cannot be greater than maxY");
     }
+    return new BoundingBox2D(minX, minY, maxX, maxY);
+  }
+
+  public static BoundingBox2D fromCenter(double centerX, double centerY, double size) {
+    if (size < 0) {
+      throw new IllegalArgumentException("size cannot be negative");
+    }
+    return fromCenter(centerX, centerY, size, size);
+  }
+
+  public static BoundingBox2D fromCenter(double centerX, double centerY, double width,
+      double height) {
+    if (width < 0) {
+      throw new IllegalArgumentException("width cannot be negative");
+    }
+    if (height < 0) {
+      throw new IllegalArgumentException("height cannot be negative");
+    }
+    double halfWidth = width / 2.0D;
+    double halfHeight = height / 2.0D;
+    double minX = centerX - halfWidth;
+    double minY = centerY - halfHeight;
+    double maxX = centerX + halfWidth;
+    double maxY = centerY + halfHeight;
+    return new BoundingBox2D(minX, minY, maxX, maxY);
+  }
+
+  protected final double minX;
+  protected final double minY;
+  protected final double maxX;
+  protected final double maxY;
+
+  protected BoundingBox2D(double minX, double minY, double maxX, double maxY) {
     this.minX = minX;
     this.minY = minY;
     this.maxX = maxX;

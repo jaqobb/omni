@@ -3,9 +3,7 @@ package dev.jaqobb.omni.random;
 import java.util.Objects;
 
 public class WeightedRandomChoice {
-  protected final double weight;
-
-  public WeightedRandomChoice(double weight) {
+  public static WeightedRandomChoice from(double weight) {
     if (Double.isNaN(weight)) {
       throw new IllegalArgumentException("weight must not be NaN");
     }
@@ -15,6 +13,28 @@ public class WeightedRandomChoice {
     if (weight <= 0.0D) {
       throw new IllegalArgumentException("weight must be greater than 0");
     }
+    return new WeightedRandomChoice(weight);
+  }
+
+  public static <T> WeightedRandomChoiceWrapper<T> from(T wrapped, double weight) {
+    if (wrapped == null) {
+      throw new IllegalArgumentException("wrapped cannot be null");
+    }
+    if (Double.isNaN(weight)) {
+      throw new IllegalArgumentException("weight must not be NaN");
+    }
+    if (Double.isInfinite(weight)) {
+      throw new IllegalArgumentException("weight must not be infinite");
+    }
+    if (weight <= 0.0D) {
+      throw new IllegalArgumentException("weight must be greater than 0");
+    }
+    return new WeightedRandomChoiceWrapper<>(wrapped, weight);
+  }
+
+  protected final double weight;
+
+  protected WeightedRandomChoice(double weight) {
     this.weight = weight;
   }
 

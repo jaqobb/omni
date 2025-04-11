@@ -3,14 +3,7 @@ package dev.jaqobb.omni.math;
 import java.util.Objects;
 
 public class BoundingBox3D {
-  protected final double minX;
-  protected final double minY;
-  protected final double minZ;
-  protected final double maxX;
-  protected final double maxY;
-  protected final double maxZ;
-
-  public BoundingBox3D(double minX, double minY, double minZ, double maxX, double maxY,
+  public static BoundingBox3D from(double minX, double minY, double minZ, double maxX, double maxY,
       double maxZ) {
     if (minX > maxX) {
       throw new IllegalArgumentException("minX cannot be greater than maxX");
@@ -21,6 +14,49 @@ public class BoundingBox3D {
     if (minZ > maxZ) {
       throw new IllegalArgumentException("minZ cannot be greater than maxZ");
     }
+    return new BoundingBox3D(minX, minY, minZ, maxX, maxY, maxZ);
+  }
+
+  public static BoundingBox3D fromCenter(double centerX, double centerY, double centerZ,
+      double size) {
+    if (size < 0) {
+      throw new IllegalArgumentException("size cannot be negative");
+    }
+    return fromCenter(centerX, centerY, centerZ, size, size, size);
+  }
+
+  public static BoundingBox3D fromCenter(double centerX, double centerY, double centerZ,
+      double width, double height, double depth) {
+    if (width < 0) {
+      throw new IllegalArgumentException("width cannot be negative");
+    }
+    if (height < 0) {
+      throw new IllegalArgumentException("height cannot be negative");
+    }
+    if (depth < 0) {
+      throw new IllegalArgumentException("depth cannot be negative");
+    }
+    double halfWidth = width / 2.0D;
+    double halfHeight = height / 2.0D;
+    double halfDepth = depth / 2.0D;
+    double minX = centerX - halfWidth;
+    double minY = centerY - halfHeight;
+    double minZ = centerZ - halfDepth;
+    double maxX = centerX + halfWidth;
+    double maxY = centerY + halfHeight;
+    double maxZ = centerZ + halfDepth;
+    return new BoundingBox3D(minX, minY, minZ, maxX, maxY, maxZ);
+  }
+
+  protected final double minX;
+  protected final double minY;
+  protected final double minZ;
+  protected final double maxX;
+  protected final double maxY;
+  protected final double maxZ;
+
+  protected BoundingBox3D(double minX, double minY, double minZ, double maxX, double maxY,
+      double maxZ) {
     this.minX = minX;
     this.minY = minY;
     this.minZ = minZ;
