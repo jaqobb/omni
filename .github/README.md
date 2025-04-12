@@ -1,6 +1,6 @@
 # omni
 
-Modular utilities designed to speed up Java development by reducing boilerplate code. omni offers a collection of independent modules, allowing you to include only what you need - saving time by avoiding repetitive code and unnecessary dependencies.
+Modular utilities designed to speed up Java development. omni offers a collection of independent modules, allowing you to include only what you need—saving time by avoiding boilerplate code and unnecessary dependencies.
 
 ## Adding to your project
 
@@ -26,7 +26,7 @@ Replace `{module}` with one of the available modules: `omn-common`, `omni-math`,
 </dependencies>
 ```
 
-### Gradle Groovy
+### Gradle (Groovy)
 
 ```groovy
 repositories {
@@ -38,5 +38,20 @@ repositories {
 
 dependencies {
   implementation "dev.jaqobb:{module}:1.0.0-SNAPSHOT"
+}
+```
+
+### Gradle (Kotlin)
+
+```kotlin
+repositories {
+  maven {
+    name = "jaqobbRepositorySnapshots"
+    url = uri("https://repository.jaqobb.dev/snapshots")
+  }
+}
+
+dependencies {
+  implementation("dev.jaqobb:{module}:1.0.0-SNAPSHOT")   
 }
 ```
