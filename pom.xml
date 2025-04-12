@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
 
   <name>omni</name>
-  <description>Set of modular utilities meant to speed up Java development</description>
+  <description>Modules utilities designed to speed up Java development</description>
 
   <licenses>
     <license>

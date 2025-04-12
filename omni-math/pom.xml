@@ -14,7 +14,7 @@
   <packaging>jar</packaging>
 
   <name>omni-math</name>
-  <description>Math-related utilities meant to speed up Java development</description>
+  <description>Math utilities designed to speed up Java development</description>
 
   <licenses>
     <license>

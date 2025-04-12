@@ -14,7 +14,7 @@
   <packaging>jar</packaging>
 
   <name>omni-random</name>
-  <description>Random-related utilities meant to speed up Java development</description>
+  <description>Random utilities designed to speed up Java development</description>
 
   <licenses>
     <license>

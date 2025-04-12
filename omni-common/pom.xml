@@ -14,7 +14,7 @@
   <packaging>jar</packaging>
 
   <name>omni-common</name>
-  <description>General utilities meant to speed up Java development</description>
+  <description>General utilities designed to speed up Java development</description>
 
   <licenses>
     <license>
