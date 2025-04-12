@@ -1,10 +1,16 @@
 # omni
 
-Modular utilities designed to speed up Java development. omni offers a collection of independent modules, allowing you to include only what you need—saving time by avoiding boilerplate code and unnecessary dependencies.
+Modular utilities designed to speed up Java development. omni offers a collection of independent modules, allowing you to include only what you need—saving time by avoiding writing boilerplate code and adding unnecessary dependencies.
+
+## Available modules
+
+* omni-common: General utilities that are small and do not yet warrant a separate module, such as helpers for converting strings to booleans or numbers.
+* omni-math: Math utilities, including classes for working with 2D and 3D bounding boxes.
+* omni-random: Random utilities, including helpers for randomizing booleans, numbers, and elements in arrays and collections, as well as support for chance testing and weighted randomness.
 
 ## Adding to your project
 
-Replace `{module}` with one of the available modules: `omn-common`, `omni-math`, `omni-random`. You can also include multiple modules as needed, without any issues.
+Replace `{module}` with one of the modules listed in the [Available modules](#available-modules) section. You can use multiple modules simultaneously as needed, without any issues.
 
 ### Maven
 
