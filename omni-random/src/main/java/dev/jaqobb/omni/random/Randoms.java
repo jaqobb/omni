@@ -9,6 +9,40 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Randoms {
   private Randoms() {}
 
+  public static byte randomByte(byte min, byte max) {
+    return randomByte(ThreadLocalRandom.current(), min, max);
+  }
+
+  public static byte randomByte(Random random, byte min, byte max) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (min > max) {
+      throw new IllegalArgumentException("min must be less than or equal to max");
+    }
+    if (min == max) {
+      return min;
+    }
+    return (byte) random.nextInt(min, max + 1);
+  }
+
+  public static short randomShort(short min, short max) {
+    return randomShort(ThreadLocalRandom.current(), min, max);
+  }
+
+  public static short randomShort(Random random, short min, short max) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    if (min > max) {
+      throw new IllegalArgumentException("min must be less than or equal to max");
+    }
+    if (min == max) {
+      return min;
+    }
+    return (short) random.nextInt(min, max + 1);
+  }
+
   public static int randomInteger(int min, int max) {
     return randomInteger(ThreadLocalRandom.current(), min, max);
   }

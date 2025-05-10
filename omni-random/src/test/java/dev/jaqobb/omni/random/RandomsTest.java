@@ -16,6 +16,26 @@ class RandomsTest {
   final Random fixedRandom = new Random(38L);
 
   @Test
+  void testRandomByte() {
+    assertEquals((byte) 9, Randoms.randomByte(fixedRandom, (byte) 1, (byte) 10));
+    assertEquals((byte) 7, Randoms.randomByte(fixedRandom, (byte) 7, (byte) 7));
+    assertThrows(IllegalArgumentException.class,
+        () -> Randoms.randomByte(null, (byte) 1, (byte) 2));
+    assertThrows(IllegalArgumentException.class,
+        () -> Randoms.randomByte(fixedRandom, (byte) 5, (byte) 4));
+  }
+
+  @Test
+  void testRandomShort() {
+    assertEquals((short) 9, Randoms.randomShort(fixedRandom, (short) 1, (short) 10));
+    assertEquals((short) 7, Randoms.randomShort(fixedRandom, (short) 7, (short) 7));
+    assertThrows(IllegalArgumentException.class,
+        () -> Randoms.randomShort(null, (short) 1, (short) 2));
+    assertThrows(IllegalArgumentException.class,
+        () -> Randoms.randomShort(fixedRandom, (short) 10, (short) 5));
+  }
+
+  @Test
   void testRandomInteger() {
     assertEquals(9, Randoms.randomInteger(fixedRandom, 1, 10));
     assertEquals(7, Randoms.randomInteger(fixedRandom, 7, 7));
