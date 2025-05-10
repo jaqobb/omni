@@ -9,22 +9,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Randoms {
   private Randoms() {}
 
-  public static boolean randomBoolean() {
-    return randomBoolean(ThreadLocalRandom.current());
+  public static int randomInteger(int min, int max) {
+    return randomInteger(ThreadLocalRandom.current(), min, max);
   }
 
-  public static boolean randomBoolean(Random random) {
-    if (random == null) {
-      throw new IllegalArgumentException("random cannot be null");
-    }
-    return random.nextBoolean();
-  }
-
-  public static int randomInt(int min, int max) {
-    return randomInt(ThreadLocalRandom.current(), min, max);
-  }
-
-  public static int randomInt(Random random, int min, int max) {
+  public static int randomInteger(Random random, int min, int max) {
     if (random == null) {
       throw new IllegalArgumentException("random cannot be null");
     }
@@ -86,6 +75,17 @@ public final class Randoms {
       return min;
     }
     return random.nextDouble(min, Math.nextUp(max));
+  }
+
+  public static boolean randomBoolean() {
+    return randomBoolean(ThreadLocalRandom.current());
+  }
+
+  public static boolean randomBoolean(Random random) {
+    if (random == null) {
+      throw new IllegalArgumentException("random cannot be null");
+    }
+    return random.nextBoolean();
   }
 
   public static <T> T randomElement(T[] array) {
@@ -174,7 +174,7 @@ public final class Randoms {
       throw new IllegalArgumentException("choices cannot be empty");
     }
     double totalWeight = totalWeight(choices);
-    double randomWeight = randomDouble(0.0D, totalWeight);
+    double randomWeight = randomDouble(random, 0.0D, totalWeight);
     while (iterator.hasNext()) {
       T choice = iterator.next();
       if (choice == null) {
@@ -228,7 +228,7 @@ public final class Randoms {
     if (random == null) {
       throw new IllegalArgumentException("random cannot be null");
     }
-    return randomDouble(0.0D, 1.0D);
+    return randomDouble(random, 0.0D, 1.0D);
   }
 
   public static boolean chance100(double chance) {
@@ -256,6 +256,6 @@ public final class Randoms {
     if (random == null) {
       throw new IllegalArgumentException("random cannot be null");
     }
-    return randomDouble(0.0D, 100.0D);
+    return randomDouble(random, 0.0D, 100.0D);
   }
 }
