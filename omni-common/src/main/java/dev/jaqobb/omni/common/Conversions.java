@@ -23,7 +23,7 @@ public final class Conversions {
     return to(string, Short::valueOf);
   }
 
-  public static int toInt(String string, int defaultValue) {
+  public static int toInteger(String string, int defaultValue) {
     Integer value = toInteger(string);
     return value != null ? value : defaultValue;
   }
